@@ -1,0 +1,267 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    color: #333;
+}
+
+.header-container a{
+    text-decoration: none;
+    color: #333;
+
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: larger;
+    padding: 0px 50px ;
+}
+
+.logo img {
+  height: 40px;
+    margin-right: 10px;
+}
+
+nav {
+    margin-left: auto; /* Align navigation to the right */
+    padding: 20px 50px ;
+}
+
+nav ul {
+ list-style: none;
+    display: flex;
+    gap: 50px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 25px 0px ;
+    background-color: #fff;
+    margin-top: 150px;
+}
+
+.hero-content {
+    max-width: 50%;
+    margin-left: 150px;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.hero p {
+    margin-bottom: 40px;
+    color: #666;
+}
+
+.hero-buttons button {
+    padding: 15px 50px;
+    margin-inline-end: 50px;
+    cursor: pointer;
+    font-size: 1em;
+    border: 2px solid #333;
+    border-radius: 5px;
+}
+
+.btn-ausleihen {
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.btn-medien {
+    background-color: transparent;
+    color: #333;
+    border: 2px solid #333;
+    border-radius: 5px;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    margin-right: 250px;
+}
+
+.media {
+    padding: 50px 150px;
+    background-color: #faebd7;
+}
+
+.media h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.media p {
+    margin-bottom: 20px;
+    color: #666;
+    width: 35%;
+}
+
+.categories {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.categories button {
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 2px solid #333;
+    cursor: pointer;
+}
+
+.categories button.active {
+    background-color: #ccc;
+}
+
+.media-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.media-list {
+    flex: 150%;
+}
+
+.media-item {
+    background-color: #e0e0e0;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    width: 75%;
+
+}
+
+.media-actions {
+    display:  flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 50px;
+}
+
+.media-actions button {
+    padding: 50px 50px;
+    border: 2px solid #333;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.media-preview {
+    margin-top: 20px;
+}
+
+
+/* Ausleihe CSS */
+
+.ausleihe {
+    padding: 50px 150px;
+;
+    background-color: #f9f9f9;
+}
+
+.ausleihe h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.ausleihe p {
+    margin-bottom: 20px;
+    color: #666;
+    width: 35%;
+}
+
+.ausleihe-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.ausleihe-list {
+    flex: 1;
+}
+
+.ausleihe-item {
+    background-color: #e0e0e0;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    width: 75%;
+}
+
+.ausleihe-actions {
+    display:  flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 50px;
+}
+
+.ausleihe-actions button {
+    padding: 50px 50px;
+    border: 2px solid #333;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.ausleihe-preview {
+    margin-top: 20px;
+}
+
+.ausleihe-preview img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Footer CSS */ 
+.footer {
+    background-color: #333;
+    padding: 50px 50px;
+    text-align: center;
+}
+
+.footer-nav {
+    margin-bottom: 10px;
+}
+
+.footer-nav a {
+    text-decoration: none;
+    color: white;
+    margin: 0 10px;
+}
+
+.footer-nav span {
+    color: #ccc;
+}
+
+.footer-info p {
+    color: #999;
+    margin: 5px 0;
+}

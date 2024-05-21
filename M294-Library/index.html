@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="#startseite">
+            <div class="logo">
+           
+                <img src="img/logo.png" alt="Logo">
+            </a>
+            <a href="#startseite">
+
+                <span>Library</span>
+            </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#startseite">Startseite </a></li>
+                    <li><a href="#medien">Medien </a></li>
+                    <li><a href="#ausleihen">Ausleihe</a></li>
+                    <li><a href="#">Über uns </a></li>
+                    <li><a href="#">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="startseite"  class="hero">
+            <div class="hero-content">
+                <h1>Lehne jetzt dein Buch bei uns aus.</h1>
+                <p>Bei Fragen oder Nebenwirkungen, kontaktieren Sie unseren Support @Contact</p>
+                <div class="hero-buttons">
+                    <a href="#ausleihen"> 
+                        <button class="btn-ausleihen">AUSLEIHEN</button>
+                    </a>
+                        <a href="#medien"> 
+                        <button  class="btn-medien">MEDIEN</button>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="img/phone.PNG" alt="">
+            </div>
+        </section>
+
+        <section id="medien" class="media">
+            <h2>Medien</h2>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+            <p>Ut auctor gravida nulla. Nam id erat elementum, accumsan dui non, porttitor lorem.</p>
+            <div class="categories">
+                <button>Tony</button>
+                <button>Fantasy</button>
+                <button>Kinder</button>
+                <button>Manga</button>
+                <button class="active">Alle Bücher</button>
+            </div>
+            <div class="media-content">
+                <div class="media-list">
+                    <div class="media-item">Buch<br>Autor<br>Inventarnummer</div>
+                    <div class="media-item">Buch<br>Autor<br>Inventarnummer</div>
+                    <div class="media-item">Buch<br>Autor<br>Inventarnummer</div>
+                    <div class="media-item">Buch<br>Autor<br>Inventarnummer</div>
+                    <div class="media-item">Buch<br>Autor<br>Inventarnummer</div>
+                    <p id="htmlOutput"></p>
+                    <p id="errorOutput"></p>
+                </div>
+
+                <div class="medien-anzeigen">
+                    <input type="button" value="anzeigen" onclick="displayMedia()">
+                </div>
+
+                <div class="media-actions">
+                    <button>Hinzufügen</button>
+                    <button>Bearbeiten</button>
+                    <button>Löschen</button>
+                    <div class="media-preview">
+                        <img src="" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="ausleihen" class="ausleihe">
+            <h2>Ausleihen</h2>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+            <p>Ut auctor gravida nulla. Nam id erat elementum, accumsan dui non, porttitor lorem.</p>
+            <div class="ausleihe-content">
+                <div class="ausleihe-list">
+                    <div class="ausleihe-item">Kunden-ID<br>Inventarnummer<br>Rückgabedatum</div>
+                    <div class="ausleihe-item">Kunden-ID<br>Inventarnummer<br>Rückgabedatum</div>
+                    <div class="ausleihe-item">Kunden-ID<br>Inventarnummer<br>Rückgabedatum</div>
+                    <div class="ausleihe-item">Kunden-ID<br>Inventarnummer<br>Rückgabedatum</div>
+                    <div class="ausleihe-item">Kunden-ID<br>Inventarnummer<br>Rückgabedatum</div>
+                    <div class="ausleihe-item">Kunden-ID<br>Inventarnummer<br>Rückgabedatum</div>
+                </div>
+                <div class="ausleihe-actions">
+                    <button>Hinzufügen</button>
+                    <button>Bearbeiten</button>
+                    <button>Löschen</button>
+                    <div class="ausleihe-preview">
+                        <img src="preview.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-nav">
+            <a href="#startseite">Startseite</a>
+            <span>|</span>
+            <a href="#medien">Medien</a>
+            <span>|</span>
+            <a href="#ausleihe">Ausleihe</a>
+            <span>|</span>
+            <a href="#ueber-uns">Über uns</a>
+            <span>|</span>
+            <a href="#kontakt">Kontakt</a>
+        </div>
+        <div class="footer-info">
+            <p>1717 Harrison St, San Francisco, CA 94103, USA</p>
+            <p>© 2022 Your Company. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        async function displayMedia() {
+            try {
+                var result = await fetch(`http://192.168.1.177:8080/library/medium`, {
+                    headers: {
+                        'Accept': 'application/json, text/plain, */*'
+                    }
+                });
+                result.json().then((items) => {
+                    var html = "<table>";
+                    html += "<tr><td class='headerline'><b>ID</b></td>";
+                    html += "<td class='headerline'><b>Titel</b></td>";
+                    html += "<td class='headerline'><b>Autor</b></td>";
+                    html += "<td class='headerline'><b>Genre</b></td>";
+                    html += "<td class='headerline'><b>EAN</b></td></tr>"
+                    items.forEach(function(item) {
+                        (color.localeCompare("odd") == 0) ? (color = "even") : (color = "odd");
+                        html += `<td class='${color}'>${item.id}</td>`;
+                        html += `<td class='${color}'>${item.title}</td>`;
+                        html += `<td class='${color}'>${item.author}</td>`;
+                        html += `<td class='${color}'>${item.genre}</td>`;
+                        html += `<td class='${color}'>${item.ean}</td></tr>`;
+                    });
+                    html += "</table>";
+                    console.log(htmlOutput);
+                    document.getElementById("htmlOutput").innerHTML = html;
+                });
+            } catch (e) {
+                document.getElementById("errorOutput").innerHTML = e;
+            }
+        }
+    </script>
+</body>
+</html>
