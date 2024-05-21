@@ -89,26 +89,39 @@ nav ul li a {
     cursor: pointer;
     font-size: 1em;
     border: 2px solid #333;
-    border-radius: 5px;
+    border-radius: 5px;    
 }
 
-.btn-ausleihen {
+#btn-ausleihen {
     background-color: #333;
     color: #fff;
-    border-radius: 5px;
 }
 
 .btn-medien {
-    background-color: transparent;
     color: #333;
-    border: 2px solid #333;
-    border-radius: 5px;
 }
 
 .hero-image img {
     max-width: 100%;
     height: auto;
     margin-right: 250px;
+}
+
+.media-categories {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.media-categories button {
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 2px solid #333;
+    cursor: pointer;
+}
+
+.media-categories button.active {
+    background-color: #ccc;
 }
 
 .media {
@@ -123,25 +136,8 @@ nav ul li a {
 
 .media p {
     margin-bottom: 20px;
-    color: #666;
-    width: 35%;
-}
-
-.categories {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.categories button {
-    padding: 10px 20px;
-    background-color: #fff;
-    border: 2px solid #333;
-    cursor: pointer;
-}
-
-.categories button.active {
-    background-color: #ccc;
+    color: #000000;
+    width: 50%;
 }
 
 .media-content {
@@ -149,43 +145,56 @@ nav ul li a {
     justify-content: space-between;
 }
 
-.media-list {
-    flex: 150%;
+#media-list {
+    width: 50%;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: none; /* Liste verstecken */
 }
 
-.media-item {
-    background-color: #e0e0e0;
-    padding: 15px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    width: 75%;
-
-}
-
-.media-actions {
-    display:  flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 50px;
-}
-
-.media-actions button {
-    padding: 50px 50px;
-    border: 2px solid #333;
-    background-color: #fff;
+#load-button, #add-button, #delete-button{
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
 }
 
-.media-preview {
+#add-medium-form, #delete-medium-form {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+    display:none ; /* Formular verstecken */
 }
 
+#add-medium-form input, #delete-medium-form input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+#add-medium-form button, #delete-medium-form button{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#add-medium-form button:hover, #delete-medium-form button:hover {
+    background-color: #45a049;
+}
 
 /* Ausleihe CSS */
-
 .ausleihe {
     padding: 50px 150px;
-;
     background-color: #f9f9f9;
 }
 

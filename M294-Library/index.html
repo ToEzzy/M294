@@ -14,7 +14,7 @@
            
                 <img src="img/logo.png" alt="Logo">
             </a>
-            <a href="#startseiteCAN">
+            <a href="#startseite">
 
                 <span>Library</span>
             </a>
@@ -38,7 +38,7 @@
                 <p>Bei Fragen oder Nebenwirkungen, kontaktieren Sie unseren Support @Contact</p>
                 <div class="hero-buttons">
                     <a href="#ausleihen"> 
-                        <button class="btn-ausleihen">AUSLEIHEN</button>
+                        <button id="btn-ausleihen">AUSLEIHEN</button>
                     </a>
                         <a href="#medien"> 
                         <button  class="btn-medien">MEDIEN</button>
@@ -49,43 +49,44 @@
                 <img src="img/phone.PNG" alt="">
             </div>
         </section>
-
+              
         <section id="medien" class="media">
             <h2>Medien</h2>
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
-            <p>Ut auctor gravida nulla. Nam id erat elementum, accumsan dui non, porttitor lorem.</p>
-            <div class="categories">
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis. Ut auctor gravida nulla. Nam id erat elementum, accumsan dui non, porttitor lorem.</p>
+
+            <div class="media-categories">
                 <button>Tony</button>
                 <button>Fantasy</button>
                 <button>Kinder</button>
                 <button>Manga</button>
                 <button class="active">Alle Bücher</button>
             </div>
+
             <div class="media-content">
-                <div class="media-list">
-                    <div class="media-item">Buch<br>Autor<br>Inventarnummer</div>
-                    <div class="media-item">Buch<br>Autor<br>Inventarnummer</div>
-                    <div class="media-item">Buch<br>Autor<br>Inventarnummer</div>
-                    <div class="media-item">Buch<br>Autor<br>Inventarnummer</div>
-                    <div class="media-item">Buch<br>Autor<br>Inventarnummer</div>
-                    <p id="htmlOutput"></p>
-                    <p id="errorOutput"></p>
-                </div>
-
-                <div class="medien-anzeigen">
-                    <input type="button" value="anzeigen" onclick="displayMedia()">
-                </div>
-
-                <div class="media-actions">
-                    <button>Hinzufügen</button>
-                    <button>Bearbeiten</button>
-                    <button>Löschen</button>
-                    <div class="media-preview">
-                        <img src="" alt="">
-                    </div>
-                </div>
+                <div id="media-list" class="media-list"></div>
+                <button id="load-button">Medien laden</button>
+                <button id="add-button">Medium hinzufügen</button>
+                <!-- Button zum Anzeigen des Löschformulars -->
+                <button id="delete-button">Medium löschen</button>
             </div>
+                         
+<br>
+<!-- Formular zum Hinzufügen eines Mediums -->
+<form id="add-medium-form">
+    <input type="text" id="title" name="title" placeholder="Titel" required>
+    <input type="text" id="author" name="author" placeholder="Autor" required>
+    <button type="submit">Medium hinzufügen</button>
+</form>
+<br>
+<!-- Formular zum Löschen eines Mediums -->
+<form id="delete-medium-form">
+    <input type="text" id="delete-id" name="delete-id" placeholder="Medium ID" required>
+    <button type="submit">Medium löschen</button>
+</form>
         </section>
+
+
         <section id="ausleihen" class="ausleihe">
             <h2>Ausleihen</h2>
             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
@@ -128,36 +129,117 @@
         </div>
     </footer>
     <script>
-        async function displayMedia() {
-            try {
-                var result = await fetch(`http://192.168.1.177:8080/library/medium`, {
-                    headers: {
-                        'Accept': 'application/json, text/plain, */*'
-                    }
-                });
-                result.json().then((items) => {
-                    var html = "<table>";
-                    html += "<tr><td class='headerline'><b>ID</b></td>";
-                    html += "<td class='headerline'><b>Titel</b></td>";
-                    html += "<td class='headerline'><b>Autor</b></td>";
-                    html += "<td class='headerline'><b>Genre</b></td>";
-                    html += "<td class='headerline'><b>EAN</b></td></tr>"
-                    items.forEach(function(item) {
-                        (color.localeCompare("odd") == 0) ? (color = "even") : (color = "odd");
-                        html += `<td class='${color}'>${item.id}</td>`;
-                        html += `<td class='${color}'>${item.title}</td>`;
-                        html += `<td class='${color}'>${item.author}</td>`;
-                        html += `<td class='${color}'>${item.genre}</td>`;
-                        html += `<td class='${color}'>${item.ean}</td></tr>`;
-                    });
-                    html += "</table>";
-                    console.log(htmlOutput);
-                    document.getElementById("htmlOutput").innerHTML = html;
-                });
-            } catch (e) {
-                document.getElementById("errorOutput").innerHTML = e;
-            }
+// Medien Anzeigen
+async function displayMedia() {
+    let endpoint = 'http://192.168.1.77:8080/library/medium';
+    try {
+        const request = await fetch(endpoint, { method: "GET" });
+        if (!request.ok) {
+            throw new Error('Network response was not ok ' + request.statusText);
         }
+        const response = await request.json();
+        console.log(response);
+
+        const userList = document.getElementById('media-list');
+        userList.innerHTML = ''; // Leere die Liste vor dem Hinzufügen neuer Einträge
+        response.forEach(user => {
+            const userDiv = document.createElement('div');
+            userDiv.textContent = `ID: ${user.id} - Titel: ${user.title} - Autor: ${user.author}`;
+            userList.appendChild(userDiv);
+        });
+    } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+    }
+}
+
+// Event-Listener zum Anzeigen/Verstecken der Medienliste
+document.getElementById('load-button').addEventListener('click', () => {
+    const userList = document.getElementById('media-list');
+    if (userList.style.display === 'block') {
+        userList.style.display = 'none'; // Liste verstecken
+    } else {
+        userList.style.display = 'block'; // Liste anzeigen
+        displayMedia(); // Daten laden und anzeigen
+    }
+});
+
+// Medium hinzufügen
+async function addMedia(event) {
+    event.preventDefault();
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+
+    let endpoint = 'http://192.168.1.77:8080/library/medium';
+
+    try {
+        const request = await fetch(endpoint, { method: "POST", headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ title, author })
+        });
+
+        if (!request.ok) {
+            throw new Error('Network response was not ok ' + request.statusText);
+        }
+
+        const response = await request.json();
+        console.log(response);
+        displayMedia(); // Aktualisiere die Liste der Medien
+        document.getElementById('add-medium-form').reset(); // Formular zurücksetzen
+        document.getElementById('add-medium-form').style.display = 'none'; // Formular wieder verstecken
+    } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+    }
+}
+
+// Event-Listener zum Absenden des Hinzufügeformulars
+document.getElementById('add-medium-form').addEventListener('submit', addMedia);
+
+// Event-Listener zum Anzeigen/Verstecken des Hinzufügeformulars
+document.getElementById('add-button').addEventListener('click', () => {
+    const form = document.getElementById('add-medium-form');
+    if (form.style.display === 'block') {
+        form.style.display = 'none'; // Formular verstecken
+    } else {
+        form.style.display = 'block'; // Formular anzeigen
+        displayMedia(); // Daten laden und anzeigen
+    }
+});
+
+// Funktion zum Löschen eines Mediums
+async function deleteMedia(event) {
+    event.preventDefault();
+    const id = document.getElementById('delete-id').value;
+
+    let endpoint = `http://192.168.1.77:8080/library/medium/${id}`;
+
+    try {
+        const request = await fetch(endpoint, { method: "DELETE" });
+        if (!request.ok) {
+            throw new Error('Network response was not ok ' + request.statusText);
+        }
+        const response = await request.json();
+        console.log(response);
+        displayMedia(); // Aktualisiere die Liste der Medien
+        document.getElementById('delete-medium-form').reset(); // Formular zurücksetzen
+        document.getElementById('delete-medium-form').style.display = 'none'; // Formular wieder verstecken
+    } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+    }
+}
+
+// Event-Listener zum Absenden des Löschformulars
+document.getElementById('delete-medium-form').addEventListener('submit', deleteMedia);
+
+// Event-Listener zum Anzeigen/Verstecken des Löschformulars
+document.getElementById('delete-button').addEventListener('click', () => {
+    const form = document.getElementById('delete-medium-form');
+    if (form.style.display === 'block') {
+        form.style.display = 'none'; // Formular verstecken
+    } else {
+        form.style.display = 'block'; // Formular anzeigen
+    }
+});
+
+
     </script>
 </body>
 </html>
